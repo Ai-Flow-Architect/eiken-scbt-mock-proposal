@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>英検S-CBT対策 AI模擬試験システム ご提案｜AIフローアーキテクト</title>
+<style>
+  :root{
+    --primary:#1e40af; --accent:#06b6d4; --green:#10b981; --warm:#f59e0b;
+    --bg:#f8fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;}
+
+  .hero{background:linear-gradient(135deg,#1e40af 0%,#06b6d4 60%,#10b981 100%);color:#fff;padding:56px 20px 48px;text-align:center;}
+  .hero-tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 16px;font-size:13px;margin-bottom:16px;}
+  .hero h1{font-size:clamp(21px,4vw,34px);font-weight:800;line-height:1.45;margin-bottom:12px;}
+  .hero p{font-size:15px;opacity:.95;max-width:640px;margin:0 auto;}
+
+  .section{max-width:920px;margin:0 auto;padding:48px 20px 8px;}
+  .section-title{font-size:21px;font-weight:800;color:var(--primary);border-left:4px solid var(--accent);padding-left:14px;margin-bottom:22px;}
+  .section-sub{font-size:14px;color:var(--muted);margin:-12px 0 22px;}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .card .ico{font-size:26px;}
+  .card .label{font-size:12px;color:var(--muted);margin:6px 0 2px;}
+  .card .val{font-size:18px;font-weight:800;}
+
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+  .step{background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:14px;padding:18px 14px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .step .n{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--accent);}
+  .step .t{font-size:15px;font-weight:800;margin:4px 0 6px;}
+  .step .d{font-size:12.5px;color:var(--muted);}
+  .step.ai{border-top-color:var(--green);}
+  .step.ai .n{color:var(--green);}
+  .arrowline{text-align:center;color:var(--muted);font-size:13px;margin:14px 0 0;}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  th{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;padding:11px 12px;text-align:left;font-size:12.5px;font-weight:700;white-space:nowrap;}
+  td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:13.5px;}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:#f8fafc;}
+  .scroll{overflow-x:auto;}
+
+  .check{list-style:none;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .check li{padding:9px 0;border-bottom:1px dashed var(--border);font-size:14.5px;display:flex;gap:10px;align-items:flex-start;}
+  .check li:last-child{border-bottom:none;}
+  .check li::before{content:"✅";flex-shrink:0;}
+
+  .sched{list-style:none;position:relative;padding-left:26px;}
+  .sched::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--primary),var(--green));border-radius:2px;}
+  .sched li{position:relative;margin-bottom:18px;}
+  .sched li::before{content:"";position:absolute;left:-24px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary);}
+  .sched .w{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--accent);}
+  .sched .t{font-size:15px;font-weight:700;}
+  .sched .d{font-size:13px;color:var(--muted);}
+
+  .guarantee{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--warm);border-radius:16px;padding:24px 24px 20px;}
+  .guarantee h3{color:#92400e;font-size:17px;margin-bottom:12px;}
+  .guarantee ul{list-style:none;}
+  .guarantee li{padding:6px 0;font-size:14px;display:flex;gap:9px;align-items:flex-start;}
+  .guarantee li::before{content:"🛡";flex-shrink:0;}
+
+  .price{background:linear-gradient(135deg,#dbeafe,#d1fae5);border-radius:16px;padding:28px 22px;text-align:center;}
+  .price .amt{font-size:42px;font-weight:900;color:var(--primary);line-height:1.15;}
+  .price .sub{font-size:13px;color:var(--muted);margin-top:6px;}
+
+  footer{background:var(--text);color:#94a3b8;text-align:center;padding:26px 20px;font-size:13px;margin-top:48px;}
+  footer strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">AIフローアーキテクト ご提案資料</div>
+  <h1>英検S-CBT対策 AI模擬試験システム<br>大問1〜3・リスニング・英作文・スピーキングを1つの流れで 🎧✍️🎙</h1>
+  <p>本番と同じ順番で最後まで通して演習し、その場でAIが採点します。<br>問題の追加はスプレッドシートに行を足すだけ。プログラミングの知識は必要ありません。</p>
+</div>
+
+<div class="section">
+  <div class="section-title">📌 ご提案の要点</div>
+  <div class="cards">
+    <div class="card"><div class="ico">💰</div><div class="label">ご費用</div><div class="val">23万円</div></div>
+    <div class="card"><div class="ico">🗓</div><div class="label">納期</div><div class="val">3〜4週間</div></div>
+    <div class="card"><div class="ico">🧑‍💻</div><div class="label">問題の追加</div><div class="val">コード不要</div></div>
+    <div class="card"><div class="ico">🛡</div><div class="label">保証</div><div class="val">全額返金</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🎯 受験の流れ（本番同様の一気通貫）</div>
+  <p class="section-sub">セクションは自動で切り替わります。タイマー・途中経過の保持にも対応します。</p>
+  <div class="flow">
+    <div class="step"><div class="n">STEP 1</div><div class="t">📝 大問1〜3</div><div class="d">短文の語句補充・長文の空所補充・内容一致。選択して次へ進みます</div></div>
+    <div class="step"><div class="n">STEP 2</div><div class="t">🎧 リスニング</div><div class="d">音声を自動再生。再生回数と待ち時間も設定できます</div></div>
+    <div class="step ai"><div class="n">STEP 3</div><div class="t">✍️ 英作文</div><div class="d">文字数を数えながら入力 → AIが語彙・文法・構成・内容を採点</div></div>
+    <div class="step ai"><div class="n">STEP 4</div><div class="t">🎙 スピーキング</div><div class="d">ブラウザで録音 → 文字起こし → AIが発話内容を採点</div></div>
+    <div class="step ai"><div class="n">STEP 5</div><div class="t">📊 総合結果</div><div class="d">セクション別のスコアと講評を1画面で表示。履歴も保存されます</div></div>
+  </div>
+  <p class="arrowline">📝 → 🎧 → ✍️ → 🎙 → 📊　すべて1回の受験としてつながります</p>
+</div>
+
+<div class="section">
+  <div class="section-title">🗂 問題の追加は「行を足すだけ」</div>
+  <p class="section-sub">Googleスプレッドシート1枚で管理します。アプリが起動時に読み込み、1回分の模擬試験として自動で組み立てます。</p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>大問</th><th>形式</th><th>問題文</th><th>選択肢</th><th>正解</th><th>音声URL</th><th>配点</th><th>制限時間</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>大問1</td><td>選択</td><td>He ( ) to the library.</td><td>go / goes / going / gone</td><td>2</td><td>—</td><td>1</td><td>60秒</td></tr>
+        <tr><td>リスニング</td><td>選択</td><td>Part 1 No.3</td><td>A / B / C / D</td><td>3</td><td>ドライブのURL</td><td>1</td><td>—</td></tr>
+        <tr><td>英作文</td><td>AI採点</td><td>Do you think …?</td><td>—</td><td>—</td><td>—</td><td>16</td><td>15分</td></tr>
+        <tr><td>スピーキング</td><td>AI採点</td><td>No.2 Please look at …</td><td>—</td><td>—</td><td>ドライブのURL</td><td>10</td><td>60秒</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:14px;">🔎 入力漏れ（正解なし・音声URL切れなど）は受験の開始前に自動でチェックし、該当行を一覧でお知らせします。</p>
+</div>
+
+<div class="section">
+  <div class="section-title">📦 ご費用に含まれるもの</div>
+  <ul class="check">
+    <li>上記の全機能とソースコード一式</li>
+    <li>問題入力用スプレッドシートのテンプレートと記入例（各設問形式のサンプル付き）</li>
+    <li>操作マニュアル（PDF）と操作解説動画</li>
+    <li>オンラインでの操作レクチャー（60分・1回）</li>
+    <li>受験履歴の保存とCSV出力</li>
+    <li>納品後2週間の質疑応答・不具合対応</li>
+    <li>ご満足いただけなければ全額返金</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">🗓 制作スケジュール（正式発注から3〜4週間）</div>
+  <ul class="sched">
+    <li><div class="w">WEEK 1</div><div class="t">設計・データ構造の確定</div><div class="d">スプレッドシートの項目をご確認いただき、そのまま運用できる形に固めます</div></li>
+    <li><div class="w">WEEK 2</div><div class="t">選択問題・リスニングの実装</div><div class="d">大問1〜3の出題、音声再生、タイマー、セクションの自動遷移</div></li>
+    <li><div class="w">WEEK 3</div><div class="t">英作文・スピーキングのAI採点</div><div class="d">採点の観点とフィードバックの文面を調整します</div></li>
+    <li><div class="w">WEEK 4</div><div class="t">通し確認・納品</div><div class="d">1回分を最後まで通してご確認いただき、マニュアル・動画・レクチャーをお渡しします</div></li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">🛡 安心の取引条件</div>
+  <div class="guarantee">
+    <h3>3つのお約束</h3>
+    <ul>
+      <li><strong>ご満足いただけなければ全額返金</strong> — 合意した仕様どおりに動かない場合は全額をお返しします</li>
+      <li><strong>納品後2週間のサポート</strong> — 問題を追加しながらのご確認期間に、ご質問と不具合へ対応します</li>
+      <li><strong>納品後は自走できる形で</strong> — マニュアル・解説動画・60分のレクチャーをお渡しします</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">💰 お見積り</div>
+  <div class="price">
+    <div class="amt">23万円</div>
+    <div class="sub">上記「含まれるもの」の全項目込み・追加費用なし<br>お見積書は所定のフォーマットにて、有効期限6ヶ月で発行いたします</div>
+  </div>
+  <p class="section-sub" style="margin-top:18px;">
+    ※ 含まれないもの：AIの利用料（OpenAI APIの従量課金・貴社アカウントでのご契約）、サーバー等の運用費、仕様変更や新機能の追加開発。
+  </p>
+</div>
+
+<footer>
+  <div><strong>AIフローアーキテクト</strong> ／ 英検S-CBT対策 AI模擬試験システム ご提案</div>
+  <div style="margin-top:6px;font-size:12px;">ご質問はココナラのメッセージにてお気軽にお申し付けください</div>
+</footer>
+
+</body>
+</html>
